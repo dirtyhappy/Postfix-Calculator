@@ -1,2 +1,1 @@
-# Postfix-Calculator
-Postfix Calculator that implements several software design patterns
+# cs363-spring2019-assignment4
