@@ -1,0 +1,51 @@
+//assignment4.mpc
+//Author : Vivek Bigelow
+
+project (assignment4) {
+	exename = assignment4 
+	install = .
+
+	specific (make, gnuace) {
+		compile_flags += -std=c++11
+	}
+
+	Source_Files {
+		Expr_Node.cpp
+		Binary_Op_Node.cpp
+		Number_Node.cpp
+		Addition_Node.cpp
+		Subtraction_Node.cpp
+		Division_Node.cpp
+		Multiplication_Node.cpp
+		Modulo_Node.cpp
+		Op_Node_Factory.cpp
+		Binary_Op_Node_Factory.cpp
+		Addition_Node_Factory.cpp
+		Subtraction_Node_Factory.cpp
+		Division_Node_Factory.cpp
+		Multiplication_Node_Factory.cpp
+		Modulo_Node_Factory.cpp
+		Expr_Node_Visitor.cpp
+		Eval_Expr_Tree.cpp
+		Expr_Tree.cpp
+		Expr_Tree_Builder.cpp
+		Calculator.cpp
+		driver.cpp
+	}
+
+	Header_Files {
+		Expr_Node.h
+		Op_Node_Factory.h
+		Binary_Op_Node_Factory.h
+		Op_Node.h
+		Binary_Op_Node.h
+		Expr_Builder.h
+		Calculator.h
+	}
+	
+	Template_Files {
+		Array_Base.cpp
+		Array.cpp
+		Stack.cpp
+	}
+}

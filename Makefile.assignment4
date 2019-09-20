@@ -1,0 +1,133 @@
+#----------------------------------------------------------------------------
+#       Macros
+#----------------------------------------------------------------------------
+CC            = gcc
+CXX           = g++
+LD            = $(CXX) $(CCFLAGS) $(CPPFLAGS)
+AR            = ar
+PICFLAGS      = -fPIC
+CPPFLAGS      = $(PICFLAGS) $(GENFLAGS) -std=c++11 -D_REENTRANT
+OBJEXT        = .o
+OUTPUT_OPTION = -o "$@"
+COMPILE.c     = $(CC) $(CFLAGS) $(CPPFLAGS) -c
+COMPILE.cc    = $(CXX) $(CCFLAGS) $(CPPFLAGS) -c
+LDFLAGS       = -L"."
+CCC           = $(CXX)
+MAKEFILE      = Makefile.assignment4
+DEPENDENCIES  = .depend.$(MAKEFILE)
+BTARGETDIR    = ./
+BIN           = $(BTARGETDIR)assignment4$(EXESUFFIX)$(EXEEXT)
+CAT           = cat
+MV            = mv -f
+RM            = rm -rf
+CP            = cp -p
+NUL           = /dev/null
+MKDIR         = mkdir -p
+TESTDIRSTART  = test -d
+TESTDIREND    = ||
+TOUCH         = touch
+EXEEXT        = 
+LIBPREFIX     = lib
+LIBSUFFIX     = 
+GENFLAGS      = -O
+LDLIBS        = -ldl $(subst lib,-l,$(sort $(basename $(notdir $(wildcard /usr/lib/librt.so /lib/librt.so))))) -lpthread
+OBJS          = Expr_Node$(OBJEXT) Binary_Op_Node$(OBJEXT) Number_Node$(OBJEXT) Addition_Node$(OBJEXT) Subtraction_Node$(OBJEXT) Division_Node$(OBJEXT) Multiplication_Node$(OBJEXT) Modulo_Node$(OBJEXT) Op_Node_Factory$(OBJEXT) Binary_Op_Node_Factory$(OBJEXT) Addition_Node_Factory$(OBJEXT) Subtraction_Node_Factory$(OBJEXT) Division_Node_Factory$(OBJEXT) Multiplication_Node_Factory$(OBJEXT) Modulo_Node_Factory$(OBJEXT) Expr_Node_Visitor$(OBJEXT) Eval_Expr_Tree$(OBJEXT) Expr_Tree$(OBJEXT) Expr_Tree_Builder$(OBJEXT) Calculator$(OBJEXT) driver$(OBJEXT)
+SRC           = Expr_Node.cpp Binary_Op_Node.cpp Number_Node.cpp Addition_Node.cpp Subtraction_Node.cpp Division_Node.cpp Multiplication_Node.cpp Modulo_Node.cpp Op_Node_Factory.cpp Binary_Op_Node_Factory.cpp Addition_Node_Factory.cpp Subtraction_Node_Factory.cpp Division_Node_Factory.cpp Multiplication_Node_Factory.cpp Modulo_Node_Factory.cpp Expr_Node_Visitor.cpp Eval_Expr_Tree.cpp Expr_Tree.cpp Expr_Tree_Builder.cpp Calculator.cpp driver.cpp
+LINK.cc       = $(LD) $(LDFLAGS)
+EXPORTFLAGS   = 
+DEPLIBS       = $(foreach lib, , $(foreach libpath, ., $(wildcard $(libpath)/lib$(lib).a)))
+
+#----------------------------------------------------------------------------
+#       Local targets
+#----------------------------------------------------------------------------
+
+all: $(BIN)
+
+$(BIN): $(OBJS) $(DEPLIBS)
+	@$(TESTDIRSTART) "$(BTARGETDIR)" $(TESTDIREND) $(MKDIR) "$(BTARGETDIR)"
+	$(LINK.cc) $(OBJS) $(LDLIBS) $(OUTPUT_OPTION)
+
+generated: $(GENERATED_DIRTY)
+	@-:
+
+Expr_Node$(OBJEXT): Expr_Node.cpp
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) Expr_Node.cpp
+
+Binary_Op_Node$(OBJEXT): Binary_Op_Node.cpp
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) Binary_Op_Node.cpp
+
+Number_Node$(OBJEXT): Number_Node.cpp
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) Number_Node.cpp
+
+Addition_Node$(OBJEXT): Addition_Node.cpp
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) Addition_Node.cpp
+
+Subtraction_Node$(OBJEXT): Subtraction_Node.cpp
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) Subtraction_Node.cpp
+
+Division_Node$(OBJEXT): Division_Node.cpp
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) Division_Node.cpp
+
+Multiplication_Node$(OBJEXT): Multiplication_Node.cpp
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) Multiplication_Node.cpp
+
+Modulo_Node$(OBJEXT): Modulo_Node.cpp
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) Modulo_Node.cpp
+
+Op_Node_Factory$(OBJEXT): Op_Node_Factory.cpp
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) Op_Node_Factory.cpp
+
+Binary_Op_Node_Factory$(OBJEXT): Binary_Op_Node_Factory.cpp
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) Binary_Op_Node_Factory.cpp
+
+Addition_Node_Factory$(OBJEXT): Addition_Node_Factory.cpp
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) Addition_Node_Factory.cpp
+
+Subtraction_Node_Factory$(OBJEXT): Subtraction_Node_Factory.cpp
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) Subtraction_Node_Factory.cpp
+
+Division_Node_Factory$(OBJEXT): Division_Node_Factory.cpp
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) Division_Node_Factory.cpp
+
+Multiplication_Node_Factory$(OBJEXT): Multiplication_Node_Factory.cpp
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) Multiplication_Node_Factory.cpp
+
+Modulo_Node_Factory$(OBJEXT): Modulo_Node_Factory.cpp
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) Modulo_Node_Factory.cpp
+
+Expr_Node_Visitor$(OBJEXT): Expr_Node_Visitor.cpp
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) Expr_Node_Visitor.cpp
+
+Eval_Expr_Tree$(OBJEXT): Eval_Expr_Tree.cpp
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) Eval_Expr_Tree.cpp
+
+Expr_Tree$(OBJEXT): Expr_Tree.cpp
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) Expr_Tree.cpp
+
+Expr_Tree_Builder$(OBJEXT): Expr_Tree_Builder.cpp
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) Expr_Tree_Builder.cpp
+
+Calculator$(OBJEXT): Calculator.cpp
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) Calculator.cpp
+
+driver$(OBJEXT): driver.cpp
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) driver.cpp
+
+clean:
+	-$(RM) $(OBJS)
+
+realclean: clean
+	-$(RM) $(BIN)
+
+check-syntax:
+	$(COMPILE.cc) $(EXPORTFLAGS) -Wall -Wextra -pedantic -fsyntax-only $(CHK_SOURCES)
+
+#----------------------------------------------------------------------------
+#       Dependencies
+#----------------------------------------------------------------------------
+
+
+depend:
+	-$(MPC_ROOT)/depgen.pl  $(CFLAGS) $(CCFLAGS) $(CPPFLAGS) -f $(DEPENDENCIES) $(SRC) 2> $(NUL)
+
+-include $(DEPENDENCIES)
